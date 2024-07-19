@@ -44,7 +44,7 @@ jobs:
       - name: Build virglrenderer
         run: |
           sudo apt update
-          sudo apt install vulkan-headers
+          sudo apt install libvulkan-dev
           meson "build-android-${{matrix.arch}}" \
             --prefix=/tmp/build \
             --cross-file "android-${{matrix.arch}}" \
