@@ -590,8 +590,9 @@ void vrend_build_format_list_common(void)
   if (epoxy_has_gl_extension("GL_S3_s3tc") ||
       epoxy_has_gl_extension("GL_EXT_texture_compression_s3tc") ||
       epoxy_has_gl_extension("GL_ANGLE_texture_compression_dxt") || dxtn_decompress) {
-     add_compressed_formats(dxtn_formats);
-     add_compressed_formats(dxtn_srgb_formats);
+      add_formats(dxtn_formats);
+      add_formats(dxtn_srgb_formats);
+
   }
 
   add_formats(srgb_formats);
