@@ -7735,10 +7735,10 @@ static int vrend_renderer_transfer_write_iov(struct vrend_context *ctx,
                      decompressed_data = malloc(4 * info->box->width * info->box->height);
 
                      for (y_tmp = 0; y_tmp < info->box->height; y_tmp ++)
-                        memcpy(decompressed_data + y_tmp * info->box->width * 4, tmp + y_tmp * nw * 4,
-                              info->box->width * 4);
-                     free(tmp);
-               } else {
+                      //  memcpy(decompressed_data + y_tmp * info->box->width * 4, tmp + y_tmp * nw * 4,
+                          //    info->box->width * 4);
+                     //free(tmp);
+           //    } else {
                      decompressed_data = uncompressDXTc(info->box->width, info->box->height, glformat,
                                                       comp_size, transparent0, &simpleAlpha, &complexAlpha, data);
                }
