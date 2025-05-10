@@ -379,6 +379,17 @@ static struct global_renderer_state vrend_state;
 
 static inline bool has_feature(enum features_id feature_id)
 {
+#ifdef __ANDROID__
+   // On Adreno, this feature cannot be used.
+   // Maybe related to https://gitlab.freedesktop.org/virgl/virglrenderer/-/issues/223 
+   // and https://developer.qualcomm.com/forum/qdn-forums/software/adreno-gpu-sdk/34738
+   if (feature_id == feat_dual_src_blend) {
+      return false;
+   }
+#endif
+   int slot = feature_id / 64;
+   uint64_t mask = 1ull << (feature_id & 63);
+   bool retval = vrend_state.features[slot] & mask ? true : false;
    VREND_DEBUG(dbg_feature_use, NULL, "Try using feature %s:%d\n",
                feature_list[feature_id].log_name,
                vrend_state.features[feature_id]);
