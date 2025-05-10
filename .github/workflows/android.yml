@@ -48,7 +48,7 @@ jobs:
             --prefix=/tmp/build \
             --cross-file "android-${{matrix.arch}}" \
             -Dplatforms=egl \
-            -Dvenus-experimental=true
+            -Dvenus-experimental=false
           ninja -C "build-android-${{matrix.arch}}" install
           cp "build-android-${{matrix.arch}}/vtest/libvirgl_test_server.so" /tmp/build/lib/
 
