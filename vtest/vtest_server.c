@@ -77,7 +77,7 @@ struct vtest_client
 
 struct vtest_server
 {
-   const char socket_name[0xff];
+   const char socket_name[PATH_MAX];
    int socket;
    const char *read_file;
 
@@ -229,7 +229,7 @@ static void vtest_server_parse_args(int argc, char **argv)
          break;
 #endif
       case OPT_SOCKET_PATH:
-         strncpy(server.socket_name, optarg, sizeof(server.socket_name));
+         strcpy(server.socket_name, optarg);
          break;
       default:
          printf("Usage: %s [--no-fork] [--no-loop-or-fork] [--multi-clients] "
