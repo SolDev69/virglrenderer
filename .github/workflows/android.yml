@@ -13,12 +13,12 @@ jobs:
 
     name: "Build ${{matrix.arch}}"
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       ANDROID_NDK_HOME: "${ANDROID_SDK_ROOT}/ndk-bundle"
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup
         run: |
@@ -53,7 +53,7 @@ jobs:
           cp "build-android-${{matrix.arch}}/vtest/libvirgl_test_server.so" /tmp/build/lib/
 
       - name: Upload libraries
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build_${{matrix.arch}}
           path: /tmp/build
