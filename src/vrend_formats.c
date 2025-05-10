@@ -557,6 +557,8 @@ static void vrend_add_formats(struct vrend_format_table *table, int num_entries)
 
 #define add_formats(x) vrend_add_formats((x), ARRAY_SIZE((x)))
 
+extern int dxtn_decompress;
+
 void vrend_build_format_list_common(void)
 {
   add_formats(base_rgba_formats);
@@ -585,11 +587,12 @@ void vrend_build_format_list_common(void)
   add_formats(snorm_la_formats);
 
   /* compressed */
-  add_formats(etc2_formats);
-  add_formats(astc_formats);
-  add_formats(rgtc_formats);
-  add_formats(dxtn_formats);
-  add_formats(dxtn_srgb_formats);
+  if (epoxy_has_gl_extension("GL_S3_s3tc") ||
+      epoxy_has_gl_extension("GL_EXT_texture_compression_s3tc") ||
+      epoxy_has_gl_extension("GL_ANGLE_texture_compression_dxt") || dxtn_decompress) {
+     add_compressed_formats(dxtn_formats);
+     add_compressed_formats(dxtn_srgb_formats);
+  }
 
   add_formats(srgb_formats);
 
